@@ -27,14 +27,13 @@ It includes:
 
 The repository contains **fictional demo data only**.
 
-The MVP stores imported migration data in the browser's `localStorage`. Panda exports are parsed locally in the browser and are not uploaded to GitHub or to a backend service.
+Demo mode stores imported migration data in the browser's `localStorage`. Production mode uses Microsoft Entra authentication and the configured SharePoint Lists through Microsoft Graph. Panda workbooks are parsed in the browser; only the resulting account records are saved to the selected data provider.
 
-That makes this suitable for UI/process validation, but **localStorage is not the production system of record**. Before team rollout, persistence and authentication should move to one of:
+The repository is private and contains fictional demo data only. Real migration data belongs in the configured SharePoint Lists and must never be committed to source control.
 
-1. the existing WatchTower backend, if its architecture/API is suitable; or
-2. Microsoft Lists / SharePoint via Microsoft Graph and Entra ID.
+The pilot uses delegated `Sites.ReadWrite.All` access. This should be reduced to selected-list access before wider rollout.
 
-No real customer data should be committed to this public repository.
+No real customer data should be committed to this repository.
 
 ## Migration pipeline
 
@@ -66,11 +65,13 @@ The importer detects common variants of fields such as customer name, Panda Iden
 On a migration record, **Generate WG template** becomes useful once:
 
 - the partner `ACC-...` Service Provider Account ID is captured; and
+- the partner-level Panda ID is captured; and
 - every imported customer has a `WGC-...` WatchGuard Account ID.
 
 The generated workbook uses the current migration mapping structure:
 
 - `ServiceProvider` row for the partner
+- the partner Panda ID on the `ServiceProvider` row
 - `Subscriber` rows for customer accounts
 - `EndpointsAndLicenses`
 - `LinkedToLicense`
@@ -133,8 +134,7 @@ For first deployment, enable **GitHub Pages → Source: GitHub Actions** in the 
 - Confirm post-submission WatchGuard workflow and validation/closure rules
 - Inspect WatchTower's codebase/API/data model
 - Decide whether WatchTower or Microsoft Lists becomes the system of record
-- Add Entra ID / shared WatchTower authentication
-- Replace browser storage with a persistent shared backend
-- Add audit/activity history
+- Complete the first end-to-end Entra + SharePoint pilot
+- Reduce pilot Graph permissions to selected-list access
 - Add email/Teams follow-up automation
 - Add real WatchGuard API integrations only after the manual workflow is stable
