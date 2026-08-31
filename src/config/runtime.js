@@ -25,7 +25,7 @@ export const runtimeConfig = {
     accountsListId: env.VITE_GRAPH_ACCOUNTS_LIST_ID || '',
     activityListId: env.VITE_GRAPH_ACTIVITY_LIST_ID || '',
     tasksListId: env.VITE_GRAPH_TASKS_LIST_ID || '',
-    scopes: splitScopes(env.VITE_GRAPH_SCOPES || 'https://graph.microsoft.com/User.Read https://graph.microsoft.com/Lists.SelectedOperations.Selected'),
+    scopes: splitScopes(env.VITE_GRAPH_SCOPES || 'https://graph.microsoft.com/User.Read https://graph.microsoft.com/Sites.ReadWrite.All'),
   },
 }
 
@@ -42,6 +42,7 @@ export function validateRuntimeConfig() {
     if (!runtimeConfig.graph.siteId) errors.push('VITE_GRAPH_SITE_ID is required when the SharePoint data provider is enabled.')
     if (!runtimeConfig.graph.migrationsListId) errors.push('VITE_GRAPH_MIGRATIONS_LIST_ID is required when the SharePoint data provider is enabled.')
     if (!runtimeConfig.graph.accountsListId) errors.push('VITE_GRAPH_ACCOUNTS_LIST_ID is required when the SharePoint data provider is enabled.')
+    if (!runtimeConfig.graph.activityListId) errors.push('VITE_GRAPH_ACTIVITY_LIST_ID is required when the SharePoint data provider is enabled.')
   }
 
   return errors

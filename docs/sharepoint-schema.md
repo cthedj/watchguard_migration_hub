@@ -18,6 +18,7 @@ One row per partner-level migration project.
 | TargetDate | Date | No | Target completion date |
 | LastActivityDate | Date | No | Most recent meaningful workflow activity |
 | WatchGuardSPAccountId | Single line text | No | Partner ACC number |
+| PartnerPandaId | Single line text | No | Partner-level Panda identifier used on the WatchGuard ServiceProvider template row |
 | PartnerBuyIn | Yes/No | Yes | Partner has agreed to proceed |
 | LoginVerified | Yes/No | Yes | WatchGuard login tested with partner |
 | NFRStatus | Choice or single line text | Yes | Not Requested / Requested / Issued / Activated |
@@ -25,6 +26,8 @@ One row per partner-level migration project.
 | DolosOperatorCreated | Yes/No | Yes | Operator created in partner WatchGuard account |
 | Notes | Multiple lines text | No | Current working notes |
 | Blocker | Single or multiple line text | No | Current blocker, if any |
+
+`PartnerPandaId` is a production-architecture addition. Add this optional column to an existing pilot Migrations List before saving partner Panda IDs from the Hub. Migrations without a partner Panda ID remain backward compatible while the column is being introduced.
 
 Recommended index/uniqueness strategy:
 

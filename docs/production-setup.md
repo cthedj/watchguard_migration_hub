@@ -86,16 +86,14 @@ For users who belong to enough groups to trigger Entra group-claim overage, the 
 
 ## Microsoft Graph permissions
 
-The target model is least privilege.
+The pilot uses delegated Microsoft Graph access so the browser application acts as the signed-in Dolos user.
 
 The application needs:
 
 - `User.Read`
-- `Lists.SelectedOperations.Selected`
+- `Sites.ReadWrite.All`
 
-Selected-list access must then be explicitly granted to the Migration Hub application for the Migration Hub Lists.
-
-If selected-list permissions prove impractical in the tenant during initial setup, a broader delegated SharePoint permission may be used temporarily for the pilot only, with a task created to reduce it before full rollout.
+`Sites.ReadWrite.All` is intentionally broad and is acceptable only for the controlled pilot. Reduce it to selected-list access before wider rollout once the tenant-specific grant flow has been proven.
 
 ## SharePoint data site
 
